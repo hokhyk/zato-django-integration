@@ -5,13 +5,17 @@ ENV_NAME=zato-django-env
 APP_NAME=sampleapp
 BIN_DIR=$(CURDIR)/$(ENV_NAME)/bin
 
-default: install
+default: run
 
 install:
 	virtualenv $(CURDIR)/$(ENV_NAME)
 	$(BIN_DIR)/pip install -r $(CURDIR)/requirements.txt
 	$(BIN_DIR)/python $(CURDIR)/$(APP_NAME)/setup.py develop
 	$(BIN_DIR)/pip install -e $(CURDIR)/$(APP_NAME)
+
+run:
+	$(MAKE) install
+	$(ENV_NAME)/bin/python $(APP_NAME)/manage.py runserver
 
 clean:
 	rm -rf $(CURDIR)/$(ENV_NAME)

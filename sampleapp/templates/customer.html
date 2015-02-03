@@ -39,7 +39,9 @@
     </div>
 
     <form action="." method="get" id="input-form">
-        <input name="cust_id" value="{{ cust_id|default:"" }}"></textarea>
+        {{ form.cust_id }}
+        <br/>
+        {{ form.client_type }}
         <br/>
         <input type="submit" value="Get customer" />
     </form>

@@ -142,3 +142,8 @@ LOGGING = {
         },
     }
 }
+
+CLIENT_ADDRESS = 'http://localhost:17010'
+CLIENT_PATH_ANY = '/clients/django/any-service-invoker'
+CLIENT_PATH_JSON = '/clients/django/json-client'
+CLIENT_CREDENTIALS = ('django', 'my-password')

@@ -6,25 +6,36 @@ from datetime import datetime
 # Django
 from django.template.response import TemplateResponse
 
+# Our app
+from customer.forms import GetCustomerForm
+
 def home(req):
+
+    form = GetCustomerForm(req.GET)
 
     # The data provided on input
     cust_id = req.GET.get('cust_id')
+    client_type = req.GET.get('client_type')
 
     if cust_id:
 
+        # What to invoke the service with
+        request = {'cust_id':cust_id}
+
+        # When was the service invoked
         before = datetime.utcnow()
 
-        # Invoke an echo service with the user-provided input.
-        response = req.zato_client.invoke('customer.get', {'cust_id':cust_id})
+        # Invoke the service with the user-provided input using a selected client
+        if client_type == 'AnyServiceInvoker':
+            response = req.client_any.invoke('customer.get', request)
+        else:
+            response = req.client_json.invoke(request)
 
-        # How long we waited for Zato, in milliseconds
+        # How long we waited for the response, in milliseconds
         time = (datetime.utcnow() - before).total_seconds() * 1000
 
     else:
         time, response = None, None
 
-    print(response)
-
     return TemplateResponse(req, 'customer.html',
-        {'time': time, 'cust_id':cust_id, 'response':response})
+        {'time':time, 'form':form, 'response':response})
