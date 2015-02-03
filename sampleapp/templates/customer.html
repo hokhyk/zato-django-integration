@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+    <title>Zato-Django Integration</title>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding:10px;
+        }
+
+        #input-form textarea{
+            width:50%;
+            height:120px;
+        }
+
+        #info tr{
+            font-size:large;
+            border-bottom:1px solid #999;
+        }
+
+        #info th {
+            border:1px solid #999;
+            background-color:#dde;
+            padding:9px;
+        }
+
+        #info td {
+            border-right:1px solid #999;
+            border-left:1px solid #999;
+            padding:14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div>
+        Enter a customer's ID and their name will be returned.
+    </div>
+
+    <form action="." method="get" id="input-form">
+        <input name="cust_id" value="{{ cust_id|default:"" }}"></textarea>
+        <br/>
+        <input type="submit" value="Get customer" />
+    </form>
+
+    {% if response.data %}
+
+        <table id="info">
+          <tr>
+            <th>Response time</th>
+            <th>Correlation ID</th>
+            <th>Output</th>
+          </tr>
+          <tr>
+            <td>{{ time|floatformat:"0" }} ms</td>
+            <td>{{ response.cid }}</td>
+            <td>{{ response.data.name }}</td>
+          </tr>
+        </table>
+
+    {% endif %}
+
+</body>
+</html>

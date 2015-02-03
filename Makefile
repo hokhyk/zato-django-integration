@@ -1,0 +1,21 @@
+
+.PHONY: test
+
+ENV_NAME=zato-django-env
+APP_NAME=sampleapp
+BIN_DIR=$(CURDIR)/$(ENV_NAME)/bin
+
+default: install
+
+install:
+	virtualenv $(CURDIR)/$(ENV_NAME)
+	$(BIN_DIR)/pip install -r $(CURDIR)/requirements.txt
+	$(BIN_DIR)/python $(CURDIR)/$(APP_NAME)/setup.py develop
+	$(BIN_DIR)/pip install -e $(CURDIR)/$(APP_NAME)
+
+clean:
+	rm -rf $(CURDIR)/$(ENV_NAME)
+	rm -rf $(CURDIR)/build
+	rm -rf $(CURDIR)/dist
+	rm -rf $(CURDIR)/src/zato_django_env.egg-info
+	find $(CURDIR) -name '*.pyc' -exec rm {} \;

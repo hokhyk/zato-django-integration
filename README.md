@@ -1,6 +1,6 @@
-Sample app to demonstrate how Zato can be used to integrate a Django application with 3 exchange rate web services in 10 lines of code.
+Sample app to demonstrate how to integrate Django applications with Zato.
 
-Zato is a lightweight, yet complete, ESB (Enterprise Service Bus) and app server in Python designed for creating middleware applications and systems of systems. 
+Zato is a Python-based middleware platform and backend application server for ESB, SOA, REST, APIs and Cloud Integrations.
 
 Read more at http://zato.io/docs
 
