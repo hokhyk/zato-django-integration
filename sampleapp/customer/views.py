@@ -27,7 +27,7 @@ def home(req):
 
         # Invoke the service with the user-provided input using a selected client
         if client_type == 'AnyServiceInvoker':
-            response = req.client_any.invoke('customer.get', request)
+            response = req.client_any.invoke('customer.get1', request)
         else:
             response = req.client_json.invoke(request)
 
